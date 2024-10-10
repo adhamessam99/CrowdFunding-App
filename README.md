@@ -3,8 +3,6 @@
 This project is a full-stack web application that allows users to create and manage crowdfunding campaigns. It includes essential features like user authentication, campaign creation, donation processing, and a dashboard to track the progress of campaigns. The system is built using React on the frontend and Express.js on the backend, with a PostgreSQL/MySQL database for data persistence. The app also features a mock payment system to simulate donation processing.
 
 ## Features
-## Features
-
 - **User Authentication**
   - Sign Up: Allows users to create an account.
   - Login: Users can log in to their account using their credentials.
