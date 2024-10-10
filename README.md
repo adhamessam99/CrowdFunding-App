@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# CrowdFunding
+## Overview
+This project is a full-stack web application that allows users to create and manage crowdfunding campaigns. It includes essential features like user authentication, campaign creation, donation processing, and a dashboard to track the progress of campaigns. The system is built using React on the frontend and Express.js on the backend, with a PostgreSQL/MySQL database for data persistence. The app also features a mock payment system to simulate donation processing.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+## Features
 
-## Available Scripts
+- **User Authentication**
+  - Sign Up: Allows users to create an account.
+  - Login: Users can log in to their account using their credentials.
+  -  Encryption: Passwords are securely stored using bcrypt.
+  - JWT: Tokens are generated using jsonwebtoken for secure user sessions.
+  
+- **Campaign Management**
+  - Create Campaign: Authenticated users can create new crowdfunding campaigns with a title, description, and fundraising goal.
+  - Campaign List: View all active campaigns available in the system.
+  - Campaign Details: View detailed information of a specific campaign, including progress.
 
-In the project directory, you can run:
+- **Donation Management**
+  - Donation Processing: Users can make donations to a campaign. This uses a mock payment system for simulation purposes.
 
-### `npm start`
+- **Dashboard**
+  - User Campaigns: View all the campaigns created by the logged-in user.
+  - Campaign Progress: Track the progress of campaigns, including total funds raised.
+  - Donations Made: A record of donations the user has made.
+ 
+## Tech Stack
+  **Frontend**
+  - React: For building dynamic user interfaces.
+  - Tailwind CSS: For styling and responsiveness.
+  - React-router: For routing and navigation between different pages.
+  - Axios: For making API requests to the backend.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Backend**
+  - Express.js: A Node.js framework for building the backend API.
+  - JWT: For secure authentication and session management.
+  - Prisma ORM: Used for interacting with the database.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Database**
+  - PostgreSQL: For storing user, campaign, and donation data.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## API Documentation
 
-### `npm run build`
+**Auth Routes**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**POST /signup**
+- Description: User signup and account creation.
+- Body: { "userName": "string", "email": "string", "passwordHash": "string" }
+- Response: 201 Created if successful, 400 if the email already exists.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**POST /login**
+- Description: User login and token generation.
+- Body: { "email": "string", "passwordHash": "string" }
+- Response: 200 OK if successful, 400 if the email or password is incorrect.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+**Campaign Routes**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**POST /create-campaign**
+- Description: Create a new campaign.
+- Body: { "campaignTitle": "string", "campaignDesc": "string", "fundGoal": "number" }
+- Response: 201 Created if successful.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**GET /dashboard**
+- Description: Retrieve campaigns created by the logged-in user.
+- Response: 200 OK with a list of campaigns.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**GET /campaigns/:id**
+- Description: Get details of a campaign by its ID.
+- Response: 200 OK with campaign details.
 
-## Learn More
+**PUT /campaign/:id**
+- Description: Update campaign with a donation.
+- Body: { "donationAmount": "number" }
+- Response: 200 OK if the donation is successful.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Backend Setup
+  **1- Clone the repository.**
+    git clone https://github.com/yourusername/crowdfunding-app.git
+    cd crowdfunding-app
+  **2- Install dependencies.**
+    npm install
+  **3- Create a .env file in the root directory and add the following environment variables:**
+    DATABASE_URL=your_database_url
+    JWT_SECRET=your_jwt_secret
+  **4- Run database migrations using Prisma.**
+    npx prisma migrate dev
+  **5- Start the backend server.**
+    cd src
+    node server.js
 
-### Code Splitting
+## Frontend Setup
+  npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Running Tests
+To run tests, ensure that the backend server is running and use tools like Postman to interact with the API routes.
+  
+  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
